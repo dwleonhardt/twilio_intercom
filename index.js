@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const port = process.env.PORT || 3000;
 const sendMessage = require('./routes/send_message');
+const messageHandler = require('./routes/message_handler');
 
 
 app.listen(port, () => {
@@ -15,3 +16,4 @@ app.listen(port, () => {
 app.use(express.static('public'));
 
 app.use('/send_message', sendMessage);
+app.use('/message_handler', messageHandler);
