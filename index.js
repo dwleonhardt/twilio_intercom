@@ -37,5 +37,4 @@ app.post('/', function (req, res) {
     })
     .then((message) => console.log(message.sid));
   });
-
 })
