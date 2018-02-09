@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
   let message = req.body.Body;
   let phone = req.body.From;
   let city = req.body.FromCity;
-  console.log(message);
+  console.log(phone);
   //
   client.users.find({ user_id: `${phone}` }, (user) => {
     if (user.body.errors) {
