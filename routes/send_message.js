@@ -12,9 +12,10 @@ router.use(bodyParser.json({ extended: true }));
 
 router.post('/', function (req, res) {
 
-  let message = req.body.data.item.conversation_parts.conversation_parts[0].body.replace(/<(?:.|\n)*?>/gm, '');;
+  let message = req.body.data.item.conversation_parts.conversation_parts[0].body.replace(/<(?:.|\n)*?>/gm, '');
 
   let userId = req.body.data.item.user.id;
+  console.log(userId);
 
   // client.users.find({ id: `${userId}` }, (user) => {
   //   var phone = user.body.phone;

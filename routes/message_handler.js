@@ -14,9 +14,13 @@ router.post('/', function (req, res) {
   let message = req.body.Body;
   let phone = req.body.From;
   let city = req.body.FromCity;
-  client.leads.create({ phone: `${phone}` }, function (r) {
-   console.log(r);
-  });
+  //
+  client.users.find({  }, (user) => {
+    console.log(user.body);
+  })
+  // client.leads.create({ phone: `${phone}` }, function (r) {
+  //  console.log(r);
+  // });
 })
 
 module.exports = router;
