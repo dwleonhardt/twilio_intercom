@@ -14,13 +14,31 @@ router.post('/', function (req, res) {
   let message = req.body.Body;
   let phone = req.body.From;
   let city = req.body.FromCity;
+  console.log(message);
   //
-  client.users.find({  }, (user) => {
-    console.log(user.body);
+  client.users.find({ user_id: `${phone}` }, (user) => {
+    if (user.body.errors) {
+      client.users.create({ user_id: `${phone}` }, function (r) {
+        console.log(r);
+      });
+    }
+
+    let messageObj = {
+      from: {
+        type: "user",
+        user_id: `${phone}`
+      },
+      body: `${message}`
+    }
+
+    client.messages.create(messageObj, () => {
+      console.log('sent');
+    });
+
   })
-  client.leads.create({ phone: `${phone}` }, function (r) {
-    console.log(r);
-  });
 })
+
+
+
 
 module.exports = router;
