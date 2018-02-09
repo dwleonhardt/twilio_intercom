@@ -16,16 +16,16 @@ router.post('/', function (req, res) {
 
   let userId = req.body.data.item.user.id;
 
-  // client.users.find({ id: `${userId}` }, (user) => {
-  //   var phone = user.body.phone;
-  //   var client = new twilio(accountSid, twilioToken);
-  //   client.messages.create({
-  //     body: `${message}`,
-  //     to: `${phone}`,
-  //     from: '+17206054564' // From a valid Twilio number
-  //   })
-  //   .then((message) => console.log(message.sid));
-  // });
+  client.users.find({ id: `${userId}` }, (user) => {
+    var phone = user.body.phone;
+    var client = new twilio(accountSid, twilioToken);
+    client.messages.create({
+      body: `${message}`,
+      to: `${phone}`,
+      from: '+17206054564' // From a valid Twilio number
+    })
+    .then((message) => console.log(message.sid));
+  });
 })
 
 module.exports = router;
