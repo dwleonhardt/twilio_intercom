@@ -19,21 +19,31 @@ router.post('/', function (req, res) {
   client.users.find({ user_id: `${phone}` }, (user) => {
     if (user.body.errors) {
       client.users.create({ user_id: `${phone}` }, function (r) {
-        console.log(r);
+        let messageObj = {
+          from: {
+            type: "user",
+            user_id: `${phone}`
+          },
+          body: `${message}`
+        }
+        client.messages.create(messageObj, () => {
+          console.log('sent');
+        });
       });
     }
 
-    let messageObj = {
-      from: {
-        type: "user",
-        user_id: `${phone}`
-      },
-      body: `${message}`
+    else {
+      let messageObj = {
+        from: {
+          type: "user",
+          user_id: `${phone}`
+        },
+        body: `${message}`
+      }
+      client.messages.create(messageObj, () => {
+        console.log('sent');
+      });
     }
-
-    client.messages.create(messageObj, () => {
-      console.log('sent');
-    });
 
   })
 })
